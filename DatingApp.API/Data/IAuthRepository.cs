@@ -9,7 +9,7 @@ namespace DatingApp.API.Data
 
          Task<User> Login(string username, string password);
 
-         Task<bool> UserExista(string username);
+         Task<bool> UserExist(string username);
 
 
     }

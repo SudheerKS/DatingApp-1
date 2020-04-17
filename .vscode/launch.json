@@ -5,11 +5,44 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
-        }
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+        
+
+        
+       {
+           "name": ".NET Core Launch (web)",
+           "type": "node",
+           "request": "launch",
+           "preLaunchTask": "build",
+           "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/DatingApp.API.dll>",
+           "args": [],
+           "cwd": "${workspaceFolder}/DatingApp.API.dll",
+           "stopAtEntry": false,
+           "launchBrowser": {
+               "enabled": true,
+               "args": "${auto-detect-url}",
+               "windows": {
+                   "command": "cmd.exe",
+                   "args": "/C start ${auto-detect-url}"
+               },
+               "osx": {
+                   "command": "open"
+               },
+               "linux": {
+                   "command": "xdg-open"
+               }
+           },
+           "env": {
+               "ASPNETCORE_ENVIRONMENT": "Development"
+           },
+           "sourceFileMap": {
+               "/Views": "${workspaceFolder}/Views"
+           }
+       }
+        
     ]
 }
