@@ -14,10 +14,9 @@ namespace DatingApp.API.Services
     {
 
           private readonly SymmetricSecurityKey _key;
-          public TokenService(IConfiguration configuration)
+          public TokenService(IConfiguration config)
           {
-                   var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                configuration.GetSection("AppSettings:Token").Value));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
           }
 
            public string CreateToken(User user)

@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatingApp.API.Controllers
 {
 
+   [Authorize]
     public class UsersController : BaseApiController
     {
          private readonly DataContext _context;

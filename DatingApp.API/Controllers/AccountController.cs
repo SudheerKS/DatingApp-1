@@ -18,9 +18,10 @@ namespace DatingApp.API.Controllers
     {
          private readonly DataContext _context;
           private readonly ITokenService _TokenService;
-        public AccountController(DataContext  context)
+        public AccountController(DataContext  context, ITokenService tokenService)
         {
             _context = context;
+            _TokenService = tokenService;
         }
 
          [HttpPost("register")]
@@ -57,13 +58,13 @@ namespace DatingApp.API.Controllers
 
                if(user == null) return Unauthorized("Invalid Credentials");
 
-               using var hmac = new HMACSHA512(); 
+               using var hmac = new HMACSHA512(user.PasswordSalt); 
 
                var computerhash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userLoginDto.Password));
 
-              for(int i = 0; i <= computerhash.Length;i++)
+              for(int i = 0; i < computerhash.Length;i++)
               {
-                  if(computerhash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Passw0rd");
+                  if(computerhash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password");
               }
 
               return new UserDto
