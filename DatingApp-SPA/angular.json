@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/popper.js/dist/umd/popper.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -123,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "DatingApp-SPA"
+  "defaultProject": "DatingApp-SPA",
+  "cli": {
+    "analytics": "5a14c7a1-370c-48cf-9306-daea2b648015"
+  }
 }

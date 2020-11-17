@@ -5,12 +5,11 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './_services/auth.service';
+import { AccountService } from './_services/account.service';
 import { HomeComponent } from './Home/Home.component';
 import { RegisterComponent } from './Register/Register.component';
-
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
    declarations: [
@@ -23,10 +22,12 @@ import { RegisterComponent } from './Register/Register.component';
    imports: [
       BrowserModule,
       HttpClientModule,
-      FormsModule
+      FormsModule,
+      BrowserAnimationsModule,
+      NgbModule
    ],
    providers: [
-      AuthService
+      AccountService
    ],
    bootstrap: [
       AppComponent

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
+import { AccountService } from '../_services/account.service';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-nav',
@@ -9,27 +12,30 @@ import { AuthService } from '../_services/auth.service';
 export class NavComponent implements OnInit {
 
    model: any = {};
-  constructor(private authService: AuthService) { }
+   loggedin: boolean;
+   currentUser$: Observable<User>;
+
+
+  constructor(public accountService: AccountService) { }
 
   ngOnInit() {
+    this.currentUser$ = this.accountService.currentUser$;
+    // console.log(this.accountService.currentUser$);
   }
 
 
   login() {
-      this.authService.login(this.model).subscribe(next => {
-      console.log('Login Successfull');
+      this.accountService.login(this.model).subscribe(response => {
+      this.loggedin = true;
      }, error => {
-      console.log('Login Failed');
+      console.log(error);
     });
    }
 
-   loggedIn() {
-           const token = localStorage.getItem('token');
-           return !!token;
-   }
-
    loggedOut() {
-    localStorage.removeItem('token');
-    console.log('logged out');
-}
-}
+     this.accountService.logout();
+     this.loggedin = false;
+   }
+  }
+
+
